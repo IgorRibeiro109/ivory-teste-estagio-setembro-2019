@@ -1,0 +1,76 @@
+﻿
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Recebe o nome digitado pelo usuário.
+            string nomeD;
+
+            Console.WriteLine("Escreva um nome: ");
+            nomeD = Console.ReadLine();
+
+            // Cria matriz para receber o resultado da função.
+            string[,] matrizR = new string[3, nomeD.Length];
+
+            // Chama função e recebe matriz.
+            matrizR = Matriz(nomeD);
+
+            // Exibir matriz.
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine(" ");
+
+                for (int j = 0; j < nomeD.Length + 2; j++)
+                {
+                    Console.Write(matrizR[i, j] + "\t ");
+                }
+            }
+
+            Console.ReadKey();
+
+            // Função para construção da matriz.
+            static string[,] Matriz(string nome)
+            {
+                // Variaveis necessarias para construção.
+                int a = 1;
+                string[,] matriz = new string[3, nome.Length + 2];
+
+                // Preenche o nome na matriz.
+                for (int i = 0; i <= nome.Length - 1; i++)
+                {
+                    matriz[1, i + 1] = nome[i].ToString();
+                }
+
+                // Preenche os numeros no sentido horario da matriz.
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < nome.Length + 2; j++)
+                    {
+                        matriz[i, j] = a.ToString();
+
+                        if (i == 1)
+                        {
+                            matriz[1, nome.Length + 1] = a.ToString();
+                            matriz[1, 0] = (((nome.Length + 2) * 2) + 2).ToString();
+                            break;
+                        }
+
+                        if (i == 2)
+                        {
+                            for (j = nome.Length + 1; j >= 0; j--)
+                            {
+                                matriz[i, j] = (a + 1).ToString();
+                                a++;
+                            }
+                            break;
+                        }
+                        a++;
+                    }
+                }
+
+                // Retorna a matriz completa.
+                return matriz;
+            }
+        }
+    }
+
